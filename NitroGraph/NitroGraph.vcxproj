@@ -151,7 +151,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CARC.cpp" />
+    <ClCompile Include="CPARSER.cpp" />
+    <ClCompile Include="CSOMMET.cpp" />
+    <ClCompile Include="CSTRING.cpp" />
     <ClCompile Include="NitroGraph.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CARC.h" />
+    <ClInclude Include="CPARSER.h" />
+    <ClInclude Include="CSOMMET.h" />
+    <ClInclude Include="CSTRING.h" />
+    <ClInclude Include="CVECTOR.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
