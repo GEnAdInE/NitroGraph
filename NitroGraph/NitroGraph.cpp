@@ -1,11 +1,23 @@
 // NitroGraph.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
 //
 
-#include <iostream>
+#include "CSOMMET.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    
+
+	CSommet Sommet1;
+	CSommet Sommet2;
+	Sommet1.SOMsetNumero(1);
+	Sommet2.SOMsetNumero(2);
+	Sommet1.SOMaddArcTo(&Sommet2);
+	Sommet1.SOMaddArcFrom(&Sommet2);
+	Sommet1.SOMaddArcTo(&Sommet2);
+	Sommet1.SOMaddArcTo(&Sommet2);
+	Sommet1.SOMaddArcTo(&Sommet2);
+
+
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage

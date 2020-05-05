@@ -19,6 +19,10 @@ CArc::CArc(CArc &param)
 	SOMdestination = param.SOMdestination;
 }
 
+CArc::~CArc()
+{
+}
+
 void CArc::ARCmodify(CSommet *SOMdest)
 {
 	SOMdestination = SOMdest;
