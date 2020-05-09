@@ -5,23 +5,22 @@
 #include <stdlib.h>  
 #include <iostream>
 
-class CSommet;
 
 class CArc
 {
 	private : 
-		CSommet* SOMdestination;
+		unsigned int SOMdestination;
 
 	public:
 
 		CArc();
-		CArc(CSommet* SOMdest);
+		CArc(unsigned int dest);
 		CArc(CArc &param);
 		~CArc();
 
 	
-		void ARCmodify(CSommet* SOMdest);
-		CSommet* ARCget();
+		void ARCmodify(unsigned int SOMdest);
+		unsigned int ARCget();
 
 
 

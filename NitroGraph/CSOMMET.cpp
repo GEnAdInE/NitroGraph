@@ -33,6 +33,15 @@ CSommet::CSommet(CSommet & param)
 
 }
 
+CSommet::CSommet(unsigned int nNum)
+{
+	nNumero = nNum;
+	ARCARCarrivant = NULL;
+	ARCARCpartant = NULL;
+	nArrivantSize = 0;
+	nPartantSize = 0;
+}
+
 
 
 CSommet::CSommet(int nNum, CArc ** arrivant,unsigned int uSizeA ,CArc ** partant,unsigned int uSizeP)
@@ -96,6 +105,37 @@ unsigned int CSommet::SOMgetSizePartant()
 	return nPartantSize;
 }
 
+void CSommet::SOMsetSizeArrivant(unsigned int nSize)
+{
+	nArrivantSize = nSize;
+}
+
+void CSommet::SOMsetSizePartant(unsigned int nSize)
+{
+	nPartantSize = nSize;
+}
+
+CArc ** CSommet::SOMgetArrivant()
+{
+	return ARCARCarrivant;
+}
+
+CArc ** CSommet::SOMgetPartant()
+{
+	return ARCARCpartant;
+}
+
+
+void CSommet::SOMsetArrivant(CArc ** ARCARCarriv)
+{
+	ARCARCarrivant = ARCARCarriv;
+}
+
+void CSommet::SOMsetPartant(CArc ** ARCARCpart)
+{
+	ARCARCpartant = ARCARCpart;
+}
+
 
 
 
@@ -104,6 +144,7 @@ unsigned int CSommet::SOMgetSizePartant()
 
 
 //POUR NICO
+/*
 
 void CSommet::SOMaddArcTo(CSommet *SOMdest)
 {
@@ -184,3 +225,4 @@ bool CSommet::SOMarcAlreadyExist(CSommet * from, CSommet * to)
 	
 	return false;
 }
+*/

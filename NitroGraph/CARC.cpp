@@ -6,10 +6,10 @@ CArc::CArc()
 
 }
 
-CArc::CArc(CSommet * SOMdest)
+CArc::CArc(unsigned int ndest)
 {
 
-	SOMdestination = SOMdest;
+	SOMdestination = ndest;
 
 }
 
@@ -23,13 +23,12 @@ CArc::~CArc()
 {
 }
 
-void CArc::ARCmodify(CSommet *SOMdest)
+void CArc::ARCmodify(unsigned int nDest)
 {
-	SOMdestination = SOMdest;
-
+	SOMdestination = nDest;
 }
 
-CSommet * CArc::ARCget()
+unsigned int CArc::ARCget()
 {
 	return SOMdestination;
 }

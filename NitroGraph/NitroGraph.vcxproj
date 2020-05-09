@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CARC.cpp" />
+    <ClCompile Include="CGRAPH.cpp" />
     <ClCompile Include="CPARSER.cpp" />
     <ClCompile Include="CSOMMET.cpp" />
     <ClCompile Include="CSTRING.cpp" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CARC.h" />
+    <ClInclude Include="CGRAPH.h" />
     <ClInclude Include="CPARSER.h" />
     <ClInclude Include="CSOMMET.h" />
     <ClInclude Include="CSTRING.h" />

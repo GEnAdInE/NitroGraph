@@ -14,6 +14,7 @@ class CSommet
 	public:
 		CSommet();
 		CSommet(CSommet &param);
+		CSommet(unsigned int nNum);
 		CSommet(int nNum, CArc ** arrivant, unsigned int uSizeA, CArc ** partant, unsigned int uSizeP);
 		~CSommet();
 
@@ -22,6 +23,12 @@ class CSommet
 		unsigned int SOMgetNumero();
 		unsigned int SOMgetSizeArrivant(); 
 		unsigned int SOMgetSizePartant();
+		void SOMsetSizeArrivant(unsigned int nSize);
+		void SOMsetSizePartant(unsigned int nSize);
+		CArc** SOMgetArrivant();
+		CArc** SOMgetPartant();
+		void SOMsetArrivant(CArc** ARCARCarriv);
+		void SOMsetPartant(CArc** ARCARCpart);
 
 
 
@@ -30,14 +37,6 @@ class CSommet
 
 
 
-
-		// cadeau pour nico 
-		void SOMaddArcTo(CSommet *SOMdest); 
-		void SOMaddArcFrom(CSommet *SOMcoming);
-		bool SOMarcAlreadyExist(CSommet *from, CSommet *to); //fonction caca inutile pour l'instant  mais peux servir (pas sur ca marche a 100%)
-
-
-		void SOMremoveARc(CArc arrivant , CArc partant);
-		void SOMmodifyArc(CArc OLDarrivant, CArc OLDpartant, CArc NEWarrivant, CArc NEWpartant);
+	
 };
 
