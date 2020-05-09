@@ -66,16 +66,22 @@ CSommet::CSommet(int nNum, CArc ** arrivant,unsigned int uSizeA ,CArc ** partant
 
 CSommet::~CSommet()
 {
-	//delete les ARC aussi a faire 
-
-	for (unsigned int nIterator = 0; nIterator < nArrivantSize-1; nIterator++)
+	//delete les ARC aussi a faire dans la fonction graph 
+	if (nArrivantSize != 0)
 	{
-		delete ARCARCarrivant[nIterator];
+		for (unsigned int nIterator = 0; nIterator < nArrivantSize; nIterator++)
+		{
+			delete ARCARCarrivant[nIterator];
+		}
 	}
-	for (unsigned int nIterator = 0; nIterator < nPartantSize-1; nIterator++)
+	if (nPartantSize != 0)
 	{
-		delete ARCARCpartant[nIterator];
+		for (unsigned int nIterator = 0; nIterator < nPartantSize; nIterator++)
+		{
+			delete ARCARCpartant[nIterator];
+		}
 	}
+	
 	free(ARCARCarrivant);
 	free(ARCARCpartant);
 
@@ -90,17 +96,17 @@ void CSommet::SOMsetNumero(unsigned int nNum)
 
 }
 
-unsigned int CSommet::SOMgetNumero()
+const unsigned int CSommet::SOMgetNumero()
 {
 	return nNumero;
 }
 
-unsigned int CSommet::SOMgetSizeArrivant()
+const unsigned int CSommet::SOMgetSizeArrivant()
 {
 	return nArrivantSize;
 }
 
-unsigned int CSommet::SOMgetSizePartant()
+const unsigned int CSommet::SOMgetSizePartant()
 {
 	return nPartantSize;
 }

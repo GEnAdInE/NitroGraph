@@ -20,9 +20,9 @@ class CSommet
 
 
 		void SOMsetNumero(unsigned int nNum);
-		unsigned int SOMgetNumero();
-		unsigned int SOMgetSizeArrivant(); 
-		unsigned int SOMgetSizePartant();
+		const unsigned int SOMgetNumero();
+		const unsigned int SOMgetSizeArrivant(); 
+		const unsigned int SOMgetSizePartant();
 		void SOMsetSizeArrivant(unsigned int nSize);
 		void SOMsetSizePartant(unsigned int nSize);
 		CArc** SOMgetArrivant();
