@@ -11,12 +11,9 @@ int main()
 	test.GRAaddSommet(0);
 	test.GRAaddSommet(1);
 	test.GRAaddSommet(2);
-	test.GRAaddSommet(3);
 	test.GRAaddArcTo(0, 1);
 	test.GRAaddArcTo(0, 2);
-	test.GRAaddArcTo(1, 2);
-	test.GRAaddArcTo(2, 3);
-	test.GRAaddArcTo(3, 0);
+	test.GRAremoveArc(0, 1);
 	test.GRAremoveArc(0, 2);
 	
 	

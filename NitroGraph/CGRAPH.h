@@ -19,17 +19,18 @@ class CGraph
 		void GRAaddSommet(unsigned int nNum);
 		void GRAaddSommet(CSommet &SOMparam);
 		void GRAaddSommet(unsigned int nNum, CArc ** arrivant, unsigned int uSizeA, CArc ** partant, unsigned int uSizeP);
-		void GRAmodifySommet(unsigned int nCurrentNum,unsigned int nNewNum);
-		void GRAdelSommet(unsigned int nNum);
+		void GRAmodifySommet(unsigned int nCurrentNum,unsigned int nNewNum);// a finir
+		void GRAdelSommet(unsigned int nNum);// a finir
 		void GRAaddArcTo(unsigned int nFromId , unsigned int nToId);
 		void GRAremoveArc(unsigned int nFromId, unsigned int nToId);
-		void modifyArc(unsigned int nFromId , unsigned int nToId, unsigned int nFromNewId, unsigned int nToNewId);
-
+		void GRAmodifyArc(unsigned int nFromId , unsigned int nToId, unsigned int nFromNewId, unsigned int nToNewId);
+		void GRAreverseAllArc();
 
 
 		//accessors
-		CSommet& GRAgetSommetById(unsigned int nNum) const;// no const bc couldn't create pointer to edit incoming and outgoing arc
-
+		CSommet& GRAgetSommetById(unsigned int nNum) const;
+		bool GRASommetAlreadyExist(unsigned int nNum);//attention risque d'erreur si on verifie pas que le sommet exist 
+		bool GRAarcAlreadyExist(unsigned int nFrom, unsigned int nTo);
 		//destructors
 		~CGraph();
 
@@ -37,7 +38,7 @@ class CGraph
 
 	private:
 		CVector<CSommet*> VECSOMSommetVector;
-		unsigned int GRAnSommetCount;
+		unsigned int nSommetCount;
 
 };
 

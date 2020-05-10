@@ -2,7 +2,6 @@
 //realoc obligatoire 
 
 
-
 CSommet::CSommet()
 {
 	nNumero = 0;
@@ -44,11 +43,24 @@ CSommet::CSommet(unsigned int nNum)
 
 
 
-CSommet::CSommet(int nNum, CArc ** arrivant,unsigned int uSizeA ,CArc ** partant,unsigned int uSizeP)
+CSommet::CSommet(int nNum, CArc ** arrivant,unsigned int nSizeA ,CArc ** partant,unsigned int nSizeP)
 {
+	try
+	{
+		if (nSizeA < 0)throw (const char *)"Sommet: can't set a SizeA < 0";
+		if (nSizeP < 0)throw (const char *)"Sommet: can't set a SizeP < 0";
+	}
+	catch (const char *e)
+	{
+		cout << e << endl;
+		return;
+	}
+
+
+
 	nNumero = nNum;
-	nPartantSize = uSizeP;
-	nArrivantSize = uSizeA;
+	nPartantSize = nSizeP;
+	nArrivantSize = nSizeA;
 	
 	ARCARCarrivant = (CArc**)malloc(sizeof(CArc**)*nArrivantSize);
 	ARCARCpartant = (CArc**)malloc(sizeof(CArc**)*nPartantSize);
@@ -66,7 +78,6 @@ CSommet::CSommet(int nNum, CArc ** arrivant,unsigned int uSizeA ,CArc ** partant
 
 CSommet::~CSommet()
 {
-	//delete les ARC aussi a faire dans la fonction graph 
 	if (nArrivantSize != 0)
 	{
 		for (unsigned int nIterator = 0; nIterator < nArrivantSize; nIterator++)
@@ -91,7 +102,16 @@ CSommet::~CSommet()
 
 void CSommet::SOMsetNumero(unsigned int nNum)
 {
-
+	try
+	{
+		if (nNum < 0)throw (const char *)"Sommet: can't set a number inferior to 0";
+		
+	}
+	catch (const char *e)
+	{
+		cout << e << endl;
+		return;
+	}
 	nNumero = nNum;
 
 }
@@ -113,11 +133,31 @@ const unsigned int CSommet::SOMgetSizePartant()
 
 void CSommet::SOMsetSizeArrivant(unsigned int nSize)
 {
+	try
+	{
+		if (nSize < 0)throw (const char *)"Sommet: can't set a number inferior to 0";
+
+	}
+	catch (const char *e)
+	{
+		cout << e << endl;
+		return;
+	}
 	nArrivantSize = nSize;
 }
 
 void CSommet::SOMsetSizePartant(unsigned int nSize)
 {
+	try
+	{
+		if (nSize < 0)throw (const char *)"Sommet: can't set a number inferior to 0";
+
+	}
+	catch (const char *e)
+	{
+		cout << e << endl;
+		return;
+	}
 	nPartantSize = nSize;
 }
 

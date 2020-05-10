@@ -1,5 +1,8 @@
 #pragma once
 #include "CARC.h"
+#include <iostream>
+
+using namespace std;
 
 
 class CSommet
