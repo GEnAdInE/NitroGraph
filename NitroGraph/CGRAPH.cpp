@@ -328,6 +328,12 @@ void CGraph::GRAmodifyArc(unsigned int nFromId, unsigned int nToId, unsigned int
 	GRAaddArcTo(nFromNewId, nToNewId);
 }
 
+void CGraph::GRAreverseArc(unsigned int nFromId, unsigned int nToId)
+{
+	GRAremoveArc(nFromId, nToId);
+	GRAaddArcTo(nToId, nFromId);
+}
+
 void CGraph::GRAreverseAllArc()
 {
 	for (unsigned int nIterator = 0; nIterator < nSommetCount; nIterator++)
@@ -336,7 +342,7 @@ void CGraph::GRAreverseAllArc()
 		{
 			unsigned int nToId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetPartant()[nSomIterator]->ARCget();
 			unsigned int nFromId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetNumero();
-			GRAmodifyArc(nFromId, nToId, nToId, nFromId);
+			GRAreverseArc(nFromId, nToId);
 		}
 		
 		
