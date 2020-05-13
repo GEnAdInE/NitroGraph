@@ -216,6 +216,7 @@ inline bool CVector<T>::VECdelElementPointer(unsigned int nIndex)
 		}
 	}
 	VECdelete(nIndex);
+	delete[] VECpValueList;
 	VECpValueList = pNewValueList;
 	VECnCapacity--;
 	return true;
