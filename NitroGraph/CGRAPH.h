@@ -20,7 +20,7 @@ class CGraph
 		void GRAaddSommet(CSommet &SOMparam);
 		void GRAaddSommet(unsigned int nNum, CArc ** arrivant, unsigned int uSizeA, CArc ** partant, unsigned int uSizeP);
 		void GRAmodifySommet(unsigned int nCurrentNum,unsigned int nNewNum);// a finir
-		bool GRAdelSommet(unsigned int nNum);
+		bool GRAdelSommetById(unsigned int nId);
 		void GRAaddArcTo(unsigned int nFromId , unsigned int nToId);
 		void GRAremoveArc(unsigned int nFromId, unsigned int nToId);
 		void GRAmodifyArc(unsigned int nFromId , unsigned int nToId, unsigned int nFromNewId, unsigned int nToNewId);

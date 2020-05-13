@@ -180,9 +180,9 @@ inline bool CVector<T>::VECdelElement(unsigned int nIndex)
 	unsigned int nNewValueListIterator = 0;
 	unsigned int nValueListIterator = 0;
 	for (nValueListIterator; nValueListIterator < VECnCapacity; nValueListIterator++) {
-		if (nNewValueListIterator != nIndex) {
-			pNewValueList[nValueListIterator] = VECpValueList[nNewValueListIterator];
-			nValueListIterator++;
+		if (nValueListIterator != nIndex) {
+			pNewValueList[nNewValueListIterator] = VECpValueList[nValueListIterator];
+			nNewValueListIterator++;
 		}
 	}
 	delete[] VECpValueList;
