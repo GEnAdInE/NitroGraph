@@ -173,7 +173,7 @@ inline bool CVector<T>::VECdelElement(unsigned int nIndex)
 	catch (const char *e)
 	{
 		cout << e << endl;
-		return;
+		return false;
 	}
 
 	T *pNewValueList = new T[VECnCapacity - 1];
@@ -188,6 +188,7 @@ inline bool CVector<T>::VECdelElement(unsigned int nIndex)
 	delete[] VECpValueList;
 	VECpValueList = pNewValueList;
 	VECnCapacity--;
+	return true;
 }
 
 /**

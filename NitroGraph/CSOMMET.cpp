@@ -18,15 +18,15 @@ CSommet::CSommet(CSommet & param)
 	nArrivantSize = param.nArrivantSize;
 	nPartantSize = param.nPartantSize;
 
-	ARCARCarrivant = (CArc**)malloc(sizeof(CArc*)*nArrivantSize);
-	ARCARCpartant = (CArc**)malloc(sizeof(CArc*)*nPartantSize);
+	ARCARCarrivant = (CArc**)malloc(sizeof(CArc**)*nArrivantSize);
+	ARCARCpartant = (CArc**)malloc(sizeof(CArc**)*nPartantSize);
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
 	{
-		ARCARCarrivant[nIterator] = new CArc(*param.ARCARCarrivant[nIterator]);
+		ARCARCarrivant[nIterator] = param.ARCARCarrivant[nIterator];
 	}
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizePartant(); nIterator++)
 	{
-		ARCARCpartant[nIterator] = new CArc(*param.ARCARCpartant[nIterator]);
+		ARCARCpartant[nIterator] = param.ARCARCpartant[nIterator];
 	}
 	
 
@@ -66,11 +66,11 @@ CSommet::CSommet(int nNum, CArc ** arrivant,unsigned int nSizeA ,CArc ** partant
 	ARCARCpartant = (CArc**)malloc(sizeof(CArc*)*nPartantSize);
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
 	{
-		ARCARCarrivant[nIterator] = new CArc(*arrivant[nIterator]);
+		ARCARCarrivant[nIterator] = arrivant[nIterator];
 	}
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizePartant(); nIterator++)
 	{
-		ARCARCpartant[nIterator] = new CArc(*partant[nIterator]);
+		ARCARCpartant[nIterator] = partant[nIterator];
 	}
 	
 
