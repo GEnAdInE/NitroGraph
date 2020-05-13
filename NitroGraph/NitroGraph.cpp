@@ -18,11 +18,10 @@ int main()
 	{
 		std::cout << test.GRAgetSommetById(10)->SOMgetArrivant()[i]->ARCget() << endl;
 	}
-	test.GRAmodifySommet(0, 1);
-	for (int i = 0; i < 2; i++)
-	{
-		std::cout << test.GRAgetSommetById(10)->SOMgetArrivant()[i]->ARCget() << endl;
-	}
+	//test.GRAmodifySommet(0, 1);
+	
+	test.GRAdelSommetById(10);
+	
 	//test.GRAreverseAllArc();
 	
 
