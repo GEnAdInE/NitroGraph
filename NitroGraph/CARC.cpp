@@ -1,16 +1,24 @@
 #include "CARC.h"
 
+/**
+ *  @brief		Default constructor of the class.
+ */
 CArc::CArc()
 {
-	SOMdestination = NULL;
-
+	SOMnDestination = NULL;
 }
 
-CArc::CArc(unsigned int ndest)
+/**
+ *  @brief		Comfort constructor of the class.
+ *	@throws		Destination can not be negative.
+ *  @param		nDest	Destination.
+ *	@example	CArc myArc = 1;
+ */
+CArc::CArc(unsigned int nDest)
 {
 	try
 	{
-		if (ndest < 0)throw (const char *)"Arc: can't set a number inferior to 0";
+		if (nDest < 0)throw (const char *)"Arc: can't set a number inferior to 0";
 
 	}
 	catch (const char *e)
@@ -19,20 +27,26 @@ CArc::CArc(unsigned int ndest)
 		return;
 	}
 
-	SOMdestination = ndest;
+	SOMnDestination = nDest;
 
 }
 
-
-CArc::CArc(CArc &param)
+/**
+ *  @brief  Copy constructor of the class.
+ *  @param  ARCParam  CArc to copy.
+ *	@example CArc myArc2 = myArc;
+ */
+CArc::CArc(CArc &ARCParam)
 {
-	SOMdestination = param.SOMdestination;
+	SOMnDestination = ARCParam.SOMnDestination;
 }
 
-CArc::~CArc()
-{
-}
-
+/**
+ *  @brief		Modify the arc's destination.
+ *	@throws		Destination can not be negative.
+ *  @param		nDest	Destination.
+ *	@example	myArc.ARCModify(1);
+ */
 void CArc::ARCmodify(unsigned int nDest)
 {
 	try
@@ -46,10 +60,14 @@ void CArc::ARCmodify(unsigned int nDest)
 		return;
 	}
 
-	SOMdestination = nDest;
+	SOMnDestination = nDest;
 }
 
-unsigned int CArc::ARCget()
+/**
+ *  @brief		Return the destination of the arc.
+ *	@example	myArc.ARCget();
+ */
+unsigned int CArc::ARCget() const
 {
-	return SOMdestination;
+	return SOMnDestination;
 }

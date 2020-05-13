@@ -7,39 +7,37 @@ using namespace std;
 
 class CSommet
 {
-
-	private:
-		unsigned int nNumero;
-		CArc** ARCARCarrivant;
-		unsigned int nArrivantSize;
-		CArc** ARCARCpartant;
-		unsigned int nPartantSize;
 	public:
+
+		//constructors
 		CSommet();
-		CSommet(CSommet &param);
 		CSommet(unsigned int nNum);
-		CSommet(int nNum, CArc ** arrivant, unsigned int uSizeA, CArc ** partant, unsigned int uSizeP);
-		~CSommet();
+		CSommet(int nNum, CArc **  ppARCarrivant, unsigned int nSizeA, CArc **  ppARCpartant, unsigned int nSizeP);
+		CSommet(CSommet &param);
 
-
+		//mutators
 		void SOMsetNumero(unsigned int nNum);
-		const unsigned int SOMgetNumero();
-		const unsigned int SOMgetSizeArrivant(); 
-		const unsigned int SOMgetSizePartant();
 		void SOMsetSizeArrivant(unsigned int nSize);
 		void SOMsetSizePartant(unsigned int nSize);
+		void SOMsetArrivant(CArc** pARCpARCarriv);
+		void SOMsetPartant(CArc** pARCpARCpart);
+
+		//accessors
+		unsigned int SOMgetNumero() const;
+		unsigned int SOMgetSizeArrivant() const;
+		unsigned int SOMgetSizePartant() const;
 		CArc** SOMgetArrivant();
 		CArc** SOMgetPartant();
-		void SOMsetArrivant(CArc** ARCARCarriv);
-		void SOMsetPartant(CArc** ARCARCpart);
 
+		//destructor
+		~CSommet();
 
-
-
-
-
-
-
+		private:
+			unsigned int SOMnNumero;
+			CArc** SOMppARCarrivant;
+			unsigned int SOMnArrivantSize;
+			CArc** SOMppARCpartant;
+			unsigned int SOMnPartantSize;
 	
 };
 

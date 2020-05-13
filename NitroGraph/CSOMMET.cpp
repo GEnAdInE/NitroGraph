@@ -1,151 +1,110 @@
 #include "CSOMMET.h"
-//realoc obligatoire 
 
-
+/**
+ *  @brief		Default constructor of the class.
+ */
 CSommet::CSommet()
 {
-	nNumero = 0;
-	ARCARCarrivant = NULL;
-	ARCARCpartant = NULL;
-	nArrivantSize = 0;
-	nPartantSize = 0;
+	SOMnNumero = 0;
+	SOMppARCarrivant = NULL;
+	SOMppARCpartant = NULL;
+	SOMnArrivantSize = 0;
+	SOMnPartantSize = 0;
 
 }
 
-CSommet::CSommet(CSommet & param)
-{
-	nNumero = param.nNumero;
-	nArrivantSize = param.nArrivantSize;
-	nPartantSize = param.nPartantSize;
-
-	ARCARCarrivant = (CArc**)malloc(sizeof(CArc*)*nArrivantSize);
-	ARCARCpartant = (CArc**)malloc(sizeof(CArc*)*nPartantSize);
-	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
-	{
-		ARCARCarrivant[nIterator] = new CArc(*param.ARCARCarrivant[nIterator]);
-	}
-	for (unsigned int nIterator = 0; nIterator < SOMgetSizePartant(); nIterator++)
-	{
-		ARCARCpartant[nIterator] = new CArc(*param.ARCARCpartant[nIterator]);
-	}
-	
-
-}
-
+/**
+ *  @brief		Comfort constructor of the class.
+ *  @param		nNum	Sommet number.
+ *	@example	CSommet mySommet = 1;
+ */
 CSommet::CSommet(unsigned int nNum)
 {
-	nNumero = nNum;
-	ARCARCarrivant = NULL;
-	ARCARCpartant = NULL;
-	nArrivantSize = 0;
-	nPartantSize = 0;
+	SOMnNumero = nNum;
+	SOMppARCarrivant = NULL;
+	SOMppARCpartant = NULL;
+	SOMnArrivantSize = 0;
+	SOMnPartantSize = 0;
 }
 
-
-
-CSommet::CSommet(int nNum, CArc ** arrivant,unsigned int nSizeA ,CArc ** partant,unsigned int nSizeP)
+/**
+ *  @brief		Comfort constructor of the class.
+ *  @param		nNum			Sommet number.
+ *  @param		ppARCarrivant	Incoming arcs.
+ *  @param		nSizeA			Size of incoming arcs.
+ *  @param		ppARCpartant	Outgoing arcs.
+ *  @param		nSizeP			Size of Outgoing arcs.
+ *	@example	CSommet mySommet(1, arcsA, 1, arcsP, 1);
+ */
+CSommet::CSommet(int nNum, CArc ** ppARCarrivant,unsigned int nSizeA ,CArc ** ppARCpartant,unsigned int nSizeP)
 {
-	try
-	{
-		if (nSizeA < 0)throw (const char *)"Sommet: can't set a SizeA < 0";
-		if (nSizeP < 0)throw (const char *)"Sommet: can't set a SizeP < 0";
-	}
-	catch (const char *e)
-	{
-		cout << e << endl;
-		return;
-	}
-
-
-
-	nNumero = nNum;
-	nPartantSize = nSizeP;
-	nArrivantSize = nSizeA;
+	SOMnNumero = nNum;
+	SOMnPartantSize = nSizeP;
+	SOMnArrivantSize = nSizeA;
 	
-	ARCARCarrivant = (CArc**)malloc(sizeof(CArc*)*nArrivantSize);
-	ARCARCpartant = (CArc**)malloc(sizeof(CArc*)*nPartantSize);
+	SOMppARCarrivant = (CArc**)malloc(sizeof(CArc*)*SOMnArrivantSize);
+	SOMppARCpartant = (CArc**)malloc(sizeof(CArc*)*SOMnPartantSize);
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
 	{
-		ARCARCarrivant[nIterator] = new CArc(*arrivant[nIterator]);
+		SOMppARCarrivant[nIterator] = new CArc(*ppARCarrivant[nIterator]);
 	}
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizePartant(); nIterator++)
 	{
-		ARCARCpartant[nIterator] = new CArc(*partant[nIterator]);
+		SOMppARCpartant[nIterator] = new CArc(*ppARCpartant[nIterator]);
 	}
-	
-
 }
 
-CSommet::~CSommet()
+/**
+ *  @brief  Copy constructor of the class.
+ *  @param  SOMParam  CSommet to copy.
+ *	@example CSommet mySommet2 = mySommet;
+ */
+CSommet::CSommet(CSommet & SOMParam)
 {
-	if (nArrivantSize != 0)
+	SOMnNumero = SOMParam.SOMnNumero;
+	SOMnArrivantSize = SOMParam.SOMnArrivantSize;
+	SOMnPartantSize = SOMParam.SOMnPartantSize;
+
+	SOMppARCarrivant = (CArc**)malloc(sizeof(CArc*)*SOMnArrivantSize);
+	SOMppARCpartant = (CArc**)malloc(sizeof(CArc*)*SOMnPartantSize);
+	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
 	{
-		for (unsigned int nIterator = 0; nIterator < nArrivantSize; nIterator++)
-		{
-			delete ARCARCarrivant[nIterator];
-		}
+		SOMppARCarrivant[nIterator] = new CArc(*SOMParam.SOMppARCarrivant[nIterator]);
 	}
-	if (nPartantSize != 0)
+	for (unsigned int nIterator = 0; nIterator < SOMgetSizePartant(); nIterator++)
 	{
-		for (unsigned int nIterator = 0; nIterator < nPartantSize; nIterator++)
-		{
-			delete ARCARCpartant[nIterator];
-		}
+		SOMppARCpartant[nIterator] = new CArc(*SOMParam.SOMppARCpartant[nIterator]);
 	}
 	
-	free(ARCARCarrivant);
-	free(ARCARCpartant);
 
 }
 
-
-
+/**
+ *  @brief  Set	Sommet's number.
+ *  @param  nNum	Sommet's number.
+ *	@example mySommet.SOMsetNumero(1);
+ */
 void CSommet::SOMsetNumero(unsigned int nNum)
 {
-	try
-	{
-		if (nNum < 0)throw (const char *)"Sommet: can't set a number inferior to 0";
-		
-	}
-	catch (const char *e)
-	{
-		cout << e << endl;
-		return;
-	}
-	nNumero = nNum;
+	SOMnNumero = nNum;
 
 }
 
-const unsigned int CSommet::SOMgetNumero()
-{
-	return nNumero;
-}
-
-const unsigned int CSommet::SOMgetSizeArrivant()
-{
-	return nArrivantSize;
-}
-
-const unsigned int CSommet::SOMgetSizePartant()
-{
-	return nPartantSize;
-}
-
+/**
+ *  @brief  Set	incoming arcs size.
+ *  @param  nSize	Size.
+ *	@example mySommet.SOMsetSizeArrivant(1);
+ */
 void CSommet::SOMsetSizeArrivant(unsigned int nSize)
 {
-	try
-	{
-		if (nSize < 0)throw (const char *)"Sommet: can't set a number inferior to 0";
-
-	}
-	catch (const char *e)
-	{
-		cout << e << endl;
-		return;
-	}
-	nArrivantSize = nSize;
+	SOMnArrivantSize = nSize;
 }
 
+/**
+ *  @brief  Set	outgoing arcs size.
+ *  @param  nSize	Size.
+ *	@example mySommet.SOMsetSizePartant(1);
+ */
 void CSommet::SOMsetSizePartant(unsigned int nSize)
 {
 	try
@@ -158,26 +117,95 @@ void CSommet::SOMsetSizePartant(unsigned int nSize)
 		cout << e << endl;
 		return;
 	}
-	nPartantSize = nSize;
+	SOMnPartantSize = nSize;
 }
 
-CArc ** CSommet::SOMgetArrivant()
+/**
+ *  @brief  Set	incoming arcs.
+ *  @param  ppARCarriv	incoming arcs.
+ *	@example mySommet.SOMsetArrivant(myIncomingArcs);
+ */
+void CSommet::SOMsetArrivant(CArc ** ppARCarriv)
 {
-	return ARCARCarrivant;
+	SOMppARCarrivant = ppARCarriv;
 }
 
-CArc ** CSommet::SOMgetPartant()
-{
-	return ARCARCpartant;
-}
-
-
-void CSommet::SOMsetArrivant(CArc ** ARCARCarriv)
-{
-	ARCARCarrivant = ARCARCarriv;
-}
-
+/**
+ *  @brief  Set	outgoing arcs.
+ *  @param  ppARCpart	outgoing arcs.
+ *	@example mySommet.SOMsetPartant(myOutgoingArcs);
+ */
 void CSommet::SOMsetPartant(CArc ** ARCARCpart)
 {
-	ARCARCpartant = ARCARCpart;
+	SOMppARCpartant = ARCARCpart;
+}
+
+/**
+ *  @brief  Return the size of incoming arcs.
+ *	@example mySommet.SOMgetSizeArrivant();
+ */
+unsigned int CSommet::SOMgetSizeArrivant() const
+{
+	return SOMnArrivantSize;
+}
+
+/**
+ *  @brief  Return the size of outgoing arcs.
+ *	@example mySommet.SOMgetSizePartant();
+ */
+unsigned int CSommet::SOMgetSizePartant() const
+{
+	return SOMnPartantSize;
+}
+
+/**
+ *  @brief  Return the Sommet's number.
+ *	@example mySommet.SOMgetNumero();
+ */
+unsigned int CSommet::SOMgetNumero() const
+{
+	return SOMnNumero;
+}
+
+/**
+ *  @brief  Return the Sommet's incoming arcs.
+ *	@example mySommet.SOMgetArrivant();
+ */
+CArc ** CSommet::SOMgetArrivant()
+{
+	return SOMppARCarrivant;
+}
+
+/**
+ *  @brief  Return the Sommet's outgoing arcs.
+ *	@example mySommet.SOMgetPartant();
+ */
+CArc ** CSommet::SOMgetPartant()
+{
+	return SOMppARCpartant;
+}
+
+/**
+ *  @brief  Destructor of the class.
+ */
+CSommet::~CSommet()
+{
+	if (SOMnArrivantSize != 0)
+	{
+		for (unsigned int nIterator = 0; nIterator < SOMnArrivantSize; nIterator++)
+		{
+			delete SOMppARCarrivant[nIterator];
+		}
+	}
+	if (SOMnPartantSize != 0)
+	{
+		for (unsigned int nIterator = 0; nIterator < SOMnPartantSize; nIterator++)
+		{
+			delete SOMppARCpartant[nIterator];
+		}
+	}
+
+	free(SOMppARCarrivant);
+	free(SOMppARCpartant);
+
 }

@@ -25,7 +25,6 @@ class CGraph
 		void GRAremoveArc(unsigned int nFromId, unsigned int nToId);
 		void GRAmodifyArc(unsigned int nFromId , unsigned int nToId, unsigned int nFromNewId, unsigned int nToNewId);
 		void GRAreverseArc(unsigned int nFromId, unsigned int nToId);
-		CGraph* GRAreverseAllArc();
 
 
 		//accessors
@@ -36,14 +35,17 @@ class CGraph
 		unsigned int GRAgetArcCount() const;
 		CSommet* GRAgetSommets(unsigned int nElement) const;
 
+		//misc
+		CGraph * GRAreverseAllArc();
+
 		//destructors
 		~CGraph();
 
 
 
 	private:
-		CVector<CSommet*> VECSOMSommetVector;
-		unsigned int nSommetCount;
-		unsigned int nArcCount;
+		CVector<CSommet*> GRAVECpSOMSommetVector;
+		unsigned int GRAnSommetCount;
+		unsigned int GRAnArcCount;
 };
 

@@ -1,10 +1,19 @@
 #include "CGRAPH.h"
 
+/**
+ *  @brief		Default constructor of the class.
+ */
 CGraph::CGraph() 
 {
-	nSommetCount = 0;
-	nArcCount = 0;
+	GRAnSommetCount = 0;
+	GRAnArcCount = 0;
 }
+
+/**
+ *  @brief		Comfort constructor of the class.
+ *  @param		PARparser	parser.
+ *	@example	CGrapg myGraph(myParser);
+ */
 CGraph::CGraph(CParser &PARparser) 
 {
 	CString STRnbSommets = PARparser.PARgetValueOfKey("NBSommets");
@@ -15,10 +24,10 @@ CGraph::CGraph(CParser &PARparser)
 	CVector<CString*> VECpSTRsommetsVector = PARparser.PARparseArray(STRsommetsArray, '\n');
 	CVector<CString*> VECpSTRarcsVector = PARparser.PARparseArray(STRarcsArray, '\n');
 
-	nSommetCount = STRnbSommets.STRtoInt();
-	nArcCount = STRnbArcs.STRtoInt();
+	GRAnSommetCount = STRnbSommets.STRtoInt();
+	GRAnArcCount = STRnbArcs.STRtoInt();
 
-	for (unsigned int nSomIterator = 0; nSomIterator < nSommetCount; nSomIterator++)
+	for (unsigned int nSomIterator = 0; nSomIterator < GRAnSommetCount; nSomIterator++)
 	{
 		size_t delPos = VECpSTRsommetsVector.VECgetElement(nSomIterator)->STRfind('=');
 		CString STRsommetNb = VECpSTRsommetsVector.VECgetElement(nSomIterator)->STRsubstr(delPos+1);
@@ -26,11 +35,11 @@ CGraph::CGraph(CParser &PARparser)
 		unsigned int nArrivantSize = 0;
 		unsigned int nPartantSize = 0;
 
-		VECSOMSommetVector.VECpush(new CSommet(nSommetNb));
+		GRAVECpSOMSommetVector.VECpush(new CSommet(nSommetNb));
 
 		
 
-		for (unsigned int nArcIterator = 0; nArcIterator < nArcCount; nArcIterator++)
+		for (unsigned int nArcIterator = 0; nArcIterator < GRAnArcCount; nArcIterator++)
 		{
 			CVector<CString*> VECarcVec = PARparser.PARparseArray(*VECpSTRarcsVector.VECgetElement(nArcIterator), ',');
 
@@ -41,10 +50,10 @@ CGraph::CGraph(CParser &PARparser)
 			CString STRdestArrivantNb = VECarcVec.VECgetElement(1)->STRsubstr(delPosPartant + 1);
 
 
-			if (STRdestArrivantNb.STRtoInt() == VECSOMSommetVector.VECgetElement(nSomIterator)->SOMgetNumero()) {
+			if (STRdestArrivantNb.STRtoInt() == GRAVECpSOMSommetVector.VECgetElement(nSomIterator)->SOMgetNumero()) {
 				nArrivantSize++;
 			}
-			if (STRdestPartantNb.STRtoInt() == VECSOMSommetVector.VECgetElement(nSomIterator)->SOMgetNumero()) {
+			if (STRdestPartantNb.STRtoInt() == GRAVECpSOMSommetVector.VECgetElement(nSomIterator)->SOMgetNumero()) {
 				nPartantSize++;
 			}
 			VECarcVec.VECdelete();
@@ -57,7 +66,7 @@ CGraph::CGraph(CParser &PARparser)
 		unsigned int nArcPartantIterator = 0;
 		unsigned int nArcArrivantIterator = 0;
 
-		for (unsigned int nArcIterator = 0; nArcIterator < nArcCount; nArcIterator++)
+		for (unsigned int nArcIterator = 0; nArcIterator < GRAnArcCount; nArcIterator++)
 		{
 			CVector<CString*> VECarcVec = PARparser.PARparseArray(*VECpSTRarcsVector.VECgetElement(nArcIterator), ',');
 
@@ -73,11 +82,11 @@ CGraph::CGraph(CParser &PARparser)
 
 
 
-			if (nDestArrivantNb == VECSOMSommetVector.VECgetElement(nSomIterator)->SOMgetNumero()) {
+			if (nDestArrivantNb == GRAVECpSOMSommetVector.VECgetElement(nSomIterator)->SOMgetNumero()) {
 				ARCarcArrivants[nArcArrivantIterator] = new CArc(nDestPartantNb);
 				nArcArrivantIterator++;
 			}
-			if (nDestPartantNb == VECSOMSommetVector.VECgetElement(nSomIterator)->SOMgetNumero()) {
+			if (nDestPartantNb == GRAVECpSOMSommetVector.VECgetElement(nSomIterator)->SOMgetNumero()) {
 				ARCarcPartants[nArcPartantIterator] = new CArc(nDestArrivantNb);
 				nArcPartantIterator++;
 			}
@@ -85,25 +94,38 @@ CGraph::CGraph(CParser &PARparser)
 
 		}
 
-		VECSOMSommetVector.VECgetElement(nSomIterator)->SOMsetArrivant(ARCarcArrivants);
-		VECSOMSommetVector.VECgetElement(nSomIterator)->SOMsetSizeArrivant(nArcArrivantIterator);
-		VECSOMSommetVector.VECgetElement(nSomIterator)->SOMsetPartant(ARCarcPartants);
-		VECSOMSommetVector.VECgetElement(nSomIterator)->SOMsetSizePartant(nArcPartantIterator);
+		GRAVECpSOMSommetVector.VECgetElement(nSomIterator)->SOMsetArrivant(ARCarcArrivants);
+		GRAVECpSOMSommetVector.VECgetElement(nSomIterator)->SOMsetSizeArrivant(nArcArrivantIterator);
+		GRAVECpSOMSommetVector.VECgetElement(nSomIterator)->SOMsetPartant(ARCarcPartants);
+		GRAVECpSOMSommetVector.VECgetElement(nSomIterator)->SOMsetSizePartant(nArcPartantIterator);
 	}
 	VECpSTRsommetsVector.VECdelete();
 	VECpSTRarcsVector.VECdelete();
 }
+
+/**
+ *  @brief  Copy constructor of the class.
+ *  @param  GRAgraph  CGraph to copy.
+ *	@example CGraph myGraph2 = myGraph;
+ */
 CGraph::CGraph(CGraph &GRAgraph) 
 {
-	nSommetCount = GRAgraph.nSommetCount;
-	nArcCount = GRAgraph.nArcCount;
+	GRAnSommetCount = GRAgraph.GRAnSommetCount;
+	GRAnArcCount = GRAgraph.GRAnArcCount;
 
-	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	for (unsigned int nGraphIterator = 0; nGraphIterator < GRAnSommetCount; nGraphIterator++)
 	{
 		CSommet* newSommet = new CSommet(*GRAgraph.GRAgetSommets(nGraphIterator));
-		VECSOMSommetVector.VECpush(newSommet);
+		GRAVECpSOMSommetVector.VECpush(newSommet);
 	}
 }
+
+/**
+ *  @brief  Add a sommet to the graph.
+ *	@throws	Sommet already exist
+ *  @param  nNum  Sommet's number.
+ *	@example myGraph.GRAaddSomet(1);
+ */
 void CGraph::GRAaddSommet(unsigned int nNum) 
 {
 
@@ -117,10 +139,16 @@ void CGraph::GRAaddSommet(unsigned int nNum)
 		return;
 	}
 
-	VECSOMSommetVector.VECpush(new CSommet(nNum));
-	nSommetCount++;
+	GRAVECpSOMSommetVector.VECpush(new CSommet(nNum));
+	GRAnSommetCount++;
 }
 
+/**
+ *  @brief  Add a sommet to the graph.
+ *	@throws	Sommet already exist
+ *  @param  SOMparam  CSommet to copy.
+ *	@example myGraph.GRAaddSomet(mySommet);
+ */
 void CGraph::GRAaddSommet(CSommet & SOMparam)
 {
 
@@ -134,11 +162,21 @@ void CGraph::GRAaddSommet(CSommet & SOMparam)
 		return;
 	}
 
-	VECSOMSommetVector.VECpush(new CSommet(SOMparam));
-	nSommetCount++;
+	GRAVECpSOMSommetVector.VECpush(new CSommet(SOMparam));
+	GRAnSommetCount++;
 }
 
-void CGraph::GRAaddSommet(unsigned int nNum, CArc ** arrivant, unsigned int nSizeA, CArc ** partant, unsigned int nSizeP)
+/**
+ *  @brief  Add a sommet to the graph.
+ *	@throws	Sommet already exist
+ *  @param  nNum			Sommet's number.
+ *  @param  ppARCarrivant	Incoming arcs.
+ *  @param  nSizeA			Size of incoming arcs.
+ *  @param  ppARCpartant	Outgoing arcs.
+ *  @param  nSizeP			Size of outgoing arcs.
+ *	@example myGraph.GRAaddSomet(1, myIncomingArcs, 1, myOutgoingArcs, 1);
+ */
+void CGraph::GRAaddSommet(unsigned int nNum, CArc ** ppARCarrivant, unsigned int nSizeA, CArc ** ppARCpartant, unsigned int nSizeP)
 {
 
 	try
@@ -150,9 +188,18 @@ void CGraph::GRAaddSommet(unsigned int nNum, CArc ** arrivant, unsigned int nSiz
 		cout << e << endl;
 		return;
 	}
-	VECSOMSommetVector.VECpush(new CSommet(nNum, arrivant, nSizeA, partant, nSizeP));
-	nSommetCount++;
+	GRAVECpSOMSommetVector.VECpush(new CSommet(nNum, ppARCarrivant, nSizeA, ppARCpartant, nSizeP));
+	GRAnSommetCount++;
 }
+
+/**
+ *  @brief  Modify a sommet.
+ *	@throws	Sommet don't exist
+ *	@throws	Sommet already exist
+ *  @param  nCurrentNum		Current sommet's number.
+ *  @param  nNewNum			New sommet's number.
+ *	@example myGraph.GRAmodifySommet(1, 2);
+ */
 void CGraph::GRAmodifySommet(unsigned int nCurrentNum, unsigned int nNewNum)
 {
 	try
@@ -169,9 +216,9 @@ void CGraph::GRAmodifySommet(unsigned int nCurrentNum, unsigned int nNewNum)
 
 	GRAgetSommetById(nCurrentNum)->SOMsetNumero(nNewNum);
 
-	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	for (unsigned int nGraphIterator = 0; nGraphIterator < GRAnSommetCount; nGraphIterator++)
 	{
-		CSommet *current = VECSOMSommetVector.VECgetElement(nGraphIterator);
+		CSommet *current = GRAVECpSOMSommetVector.VECgetElement(nGraphIterator);
 		for (unsigned int nSommetIterator = 0; nSommetIterator < current->SOMgetSizePartant(); nSommetIterator++)
 		{
 			if (current->SOMgetPartant()[nSommetIterator]->ARCget() == nCurrentNum)
@@ -190,6 +237,13 @@ void CGraph::GRAmodifySommet(unsigned int nCurrentNum, unsigned int nNewNum)
 
 	}
 }
+
+/**
+ *  @brief  Remove a sommet.
+ *	@throws	Sommet don't exist
+ *  @param  nId		Sommet's number to remove.
+ *	@example myGraph.GRAdelSommet(1);
+ */
 bool CGraph::GRAdelSommetById(unsigned int nId)
 {
 	try
@@ -204,9 +258,9 @@ bool CGraph::GRAdelSommetById(unsigned int nId)
 	}
 
 
-	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	for (unsigned int nGraphIterator = 0; nGraphIterator < GRAnSommetCount; nGraphIterator++)
 	{
-		CSommet *current = VECSOMSommetVector.VECgetElement(nGraphIterator);
+		CSommet *current = GRAVECpSOMSommetVector.VECgetElement(nGraphIterator);
 		for (unsigned int nSommetIterator = 0; nSommetIterator < current->SOMgetSizePartant(); nSommetIterator++)
 		{
 			if (current->SOMgetPartant()[nSommetIterator]->ARCget() == nId)
@@ -223,17 +277,24 @@ bool CGraph::GRAdelSommetById(unsigned int nId)
 
 		}
 	}
-	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	for (unsigned int nGraphIterator = 0; nGraphIterator < GRAnSommetCount; nGraphIterator++)
 	{
-		if (VECSOMSommetVector.VECgetElement(nGraphIterator)->SOMgetNumero() == nId) {
-			VECSOMSommetVector.VECdelElementPointer(nGraphIterator);
+		if (GRAVECpSOMSommetVector.VECgetElement(nGraphIterator)->SOMgetNumero() == nId) {
+			GRAVECpSOMSommetVector.VECdelElementPointer(nGraphIterator);
 			break;
 		}
 	}
-	nSommetCount--;
+	GRAnSommetCount--;
 	return true;
 }
 
+/**
+ *  @brief  Add an arc from a sommet to another.
+ *	@throws	Arc already exist
+ *  @param  nFromId		Sommet's number from which the arc starts.
+ *  @param  nToId		Sommet's number to which the arc ends.
+ *	@example myGraph.GRAaddArcTo(1, 2);
+ */
 void CGraph::GRAaddArcTo(unsigned int nFromId,unsigned int nToId)
 {
 
@@ -272,9 +333,16 @@ void CGraph::GRAaddArcTo(unsigned int nFromId,unsigned int nToId)
 		pSOMdest->SOMgetArrivant()[pSOMdest->SOMgetSizeArrivant()] = new CArc(nFromId);
 	}
 	pSOMdest->SOMsetSizeArrivant(pSOMdest->SOMgetSizeArrivant()+1);
-	nArcCount++;
+	GRAnArcCount++;
 }
 
+/**
+ *  @brief  Remove an arc from a sommet to another.
+ *	@throws	Arc don't exist
+ *  @param  nFromId		Sommet's number from which the arc starts.
+ *  @param  nToId		Sommet's number to which the arc ends.
+ *	@example myGraph.GRAremoveArc(1, 2);
+ */
 void CGraph::GRAremoveArc(unsigned int nFromId, unsigned int nToId)
 {
 	try
@@ -321,32 +389,50 @@ void CGraph::GRAremoveArc(unsigned int nFromId, unsigned int nToId)
 			pSOMdest->SOMsetSizeArrivant(pSOMdest->SOMgetSizeArrivant() - 1);
 		}
 	}
-	nArcCount--;
+	GRAnArcCount--;
 
 }
 
+/**
+ *  @brief  Modify an Arc.
+ *  @param  nFromId			Sommet's number from which the arc starts.
+ *  @param  nToId			Sommet's number to which the arc ends.
+ *  @param  nNewFromId		Sommet's number from which the arc will start.
+ *  @param  nNewToId		Sommet's number to which the arc will end.
+ *	@example myGraph.Modify(1, 2, 2, 1);
+ */
 void CGraph::GRAmodifyArc(unsigned int nFromId, unsigned int nToId, unsigned int nFromNewId, unsigned int nToNewId)
 {
 	GRAremoveArc(nFromId, nToId);
 	GRAaddArcTo(nFromNewId, nToNewId);
 }
 
+/**
+ *  @brief  Reverse an arc.
+ *  @param  nFromId			Sommet's number from which the arc starts.
+ *  @param  nToId			Sommet's number to which the arc ends.
+ *	@example myGraph.GRAreverseArc(1, 2);
+ */
 void CGraph::GRAreverseArc(unsigned int nFromId, unsigned int nToId)
 {
 	GRAremoveArc(nFromId, nToId);
 	GRAaddArcTo(nToId, nFromId);
 }
 
+/**
+ *  @brief  Return a pointer to a new graph with all arcs reversed.
+ *	@example CGraph * myReversedGraph = myGraph.GRAreverseAllArc();
+ */
 CGraph * CGraph::GRAreverseAllArc()
 {
-	CGraph* newGraph = new CGraph(*this);
+	CGraph * newGraph = new CGraph(*this);
 
-	for (unsigned int nIterator = 0; nIterator < nSommetCount; nIterator++)
+	for (unsigned int nIterator = 0; nIterator < GRAnSommetCount; nIterator++)
 	{
-		for (unsigned int nSomIterator = 0; nSomIterator < VECSOMSommetVector.VECgetElement(nIterator)->SOMgetSizePartant(); nSomIterator++)
+		for (unsigned int nSomIterator = 0; nSomIterator < GRAVECpSOMSommetVector.VECgetElement(nIterator)->SOMgetSizePartant(); nSomIterator++)
 		{
-			unsigned int nToId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetPartant()[nSomIterator]->ARCget();
-			unsigned int nFromId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetNumero();
+			unsigned int nToId = GRAVECpSOMSommetVector.VECgetElement(nIterator)->SOMgetPartant()[nSomIterator]->ARCget();
+			unsigned int nFromId = GRAVECpSOMSommetVector.VECgetElement(nIterator)->SOMgetNumero();
 			newGraph->GRAreverseArc(nFromId, nToId);
 		}
 		
@@ -355,29 +441,41 @@ CGraph * CGraph::GRAreverseAllArc()
 
 }
 
-//Getter of sommet 
+/**
+ *  @brief  Return a pointer to a sommet.
+ *  @param  nNum			Sommet's number to get.
+ *	@example CSommet * mySommet = myGraph.GRAgetSommetById(1);
+ */
 CSommet* CGraph::GRAgetSommetById(unsigned int nNum) const {
 
-
-	//faire un try catch ici mais probleme de const
-
-	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	for (unsigned int nGraphIterator = 0; nGraphIterator < GRAnSommetCount; nGraphIterator++)
 	{
-		if (VECSOMSommetVector.VECgetElement(nGraphIterator)->SOMgetNumero() == nNum) return VECSOMSommetVector.VECgetElement(nGraphIterator);
+		if (GRAVECpSOMSommetVector.VECgetElement(nGraphIterator)->SOMgetNumero() == nNum) return GRAVECpSOMSommetVector.VECgetElement(nGraphIterator);
 	}
 	return nullptr;
 }
 
+/**
+ *  @brief  Return true if the sommet already exist, false otherwise.
+ *  @param  nNum			Sommet's number to check.
+ *	@example myGraph.GRASommetAlreadyExist(1);
+ */
 bool CGraph::GRASommetAlreadyExist(unsigned int nNum) const
 {
-	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	for (unsigned int nGraphIterator = 0; nGraphIterator < GRAnSommetCount; nGraphIterator++)
 	{
-		if (VECSOMSommetVector.VECgetElement(nGraphIterator)->SOMgetNumero() == nNum) return true;
+		if (GRAVECpSOMSommetVector.VECgetElement(nGraphIterator)->SOMgetNumero() == nNum) return true;
 	}
 
 	return false;
 }
 
+/**
+ *  @brief  Return true if the arc already exist, false otherwise.
+ *  @param  nFromId			Sommet's number from which the arc starts.
+ *  @param  nToId			Sommet's number to which the arc ends.
+ *	@example myGraph.GRAarcAlreadyExist(1, 2);
+ */
 bool CGraph::GRAarcAlreadyExist(unsigned int nFom, unsigned int nTo) const
 {
 	
@@ -391,36 +489,50 @@ bool CGraph::GRAarcAlreadyExist(unsigned int nFom, unsigned int nTo) const
 	return false;
 }
 
+/**
+ *  @brief  Return the number of sommets in the graph.
+ *	@example unsigned int myGraphSommetCount = myGraph.GRAgetSommetCount();
+ */
 unsigned int CGraph::GRAgetSommetCount() const
 {
-	return nSommetCount;
+	return GRAnSommetCount;
 }
 
+/**
+ *  @brief  Return the number of arcs in the graph.
+ *	@example unsigned int myGraphArcCount = myGraph.GRAgetArcCount();
+ */
 unsigned int CGraph::GRAgetArcCount() const
 {
-	return nArcCount;
+	return GRAnArcCount;
 }
 
+/**
+ *  @brief  Return the sommet at the index specified in the vector.
+ *	@example nElement	Vector index;
+ */
 CSommet * CGraph::GRAgetSommets(unsigned int nElement) const
 {
-	return VECSOMSommetVector.VECgetElement(nElement);
+	return GRAVECpSOMSommetVector.VECgetElement(nElement);
 }
 
-//Destructor
+/**
+ *  @brief  Destructor of the class.
+ */
 CGraph::~CGraph()
 {
-	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	for (unsigned int nGraphIterator = 0; nGraphIterator < GRAnSommetCount; nGraphIterator++)
 	{
-		CSommet *current = VECSOMSommetVector.VECgetElement(nGraphIterator);
+		CSommet *current = GRAVECpSOMSommetVector.VECgetElement(nGraphIterator);
 		for (unsigned int nSommetIterator = 0; nSommetIterator < current->SOMgetSizePartant(); nSommetIterator++)
 		{
-			unsigned int dest = current->SOMgetPartant()[nSommetIterator]->ARCget();
-			unsigned int from = current->SOMgetNumero();
-			GRAremoveArc(from, dest);
+			unsigned int nDest = current->SOMgetPartant()[nSommetIterator]->ARCget();
+			unsigned int nFrom = current->SOMgetNumero();
+			GRAremoveArc(nFrom, nDest);
 		}
 	}
-	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	for (unsigned int nGraphIterator = 0; nGraphIterator < GRAnSommetCount; nGraphIterator++)
 	{
-		delete VECSOMSommetVector.VECgetElement(nGraphIterator);
+		delete GRAVECpSOMSommetVector.VECgetElement(nGraphIterator);
 	}
 }

@@ -31,8 +31,8 @@ void PRIprint(const CVector<T> &VECvector) {
 
 
 /**
-*  @brief  Print the Matrix to stdout.
-*	@example print(myMatrix);
+*  @brief  Print the Graph to stdout.
+*	@example print(myGraph);
 */
 void PRIprint(const CGraph &GRAgraph) {
 	cout << "NBSommets=" << GRAgraph.GRAgetSommetCount() << endl;

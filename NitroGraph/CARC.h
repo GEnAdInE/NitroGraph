@@ -9,21 +9,21 @@ using namespace std;
 
 class CArc
 {
-	private : 
-		unsigned int SOMdestination;
-
 	public:
 
+		//constructors
 		CArc();
-		CArc(unsigned int dest);
-		CArc(CArc &param);
-		~CArc();
-
+		CArc(unsigned int nDest);
+		CArc(CArc &ARCparam);
 	
-		void ARCmodify(unsigned int SOMdest);
-		unsigned int ARCget();
+		//mutators
+		void ARCmodify(unsigned int nDest);
 
+		//accessors
+		unsigned int ARCget() const;
 
+	private:
+		unsigned int SOMnDestination;
 
 };
 

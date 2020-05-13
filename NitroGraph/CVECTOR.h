@@ -97,7 +97,7 @@ CVector<T>::CVector(const CVector<T>& VECParam) {
 /**
  *  @brief  Push an element inside the vector.
  *  @param  value	New element to push.
- *	@example myVector.push("Hello");
+ *	@example myVector.VECpush("Hello");
  */
 template<class T>
 void CVector<T>::VECpush(T value) {
@@ -118,7 +118,7 @@ void CVector<T>::VECpush(T value) {
 /**
  *  @brief  Pop an element from the vector.
 *	@throws Empty vector.
- *  @example myVector.pop();
+ *  @example myVector.VECpop();
  */
 template<class T>
 void CVector<T>::VECpop() {
@@ -147,7 +147,7 @@ void CVector<T>::VECpop() {
  *	@throws Index is out of vector range.
  *  @param  element	 New element to set.
  *	@param	index	 Index of the element that will be modified.
- *	@example myVector.modify("World", 1);
+ *	@example myVector.VECmodify("World", 1);
  */
 template<class T>
 inline bool CVector<T>::VECmodify(T element, unsigned int nIndex) {
@@ -165,6 +165,12 @@ inline bool CVector<T>::VECmodify(T element, unsigned int nIndex) {
 	return true;
 }
 
+/**
+ *  @brief  Delete an element from the vector.
+ *	@throws Index is out of vector range.
+ *	@param	index	 Index of the element that will be removed.
+ *	@example myVector.VECdelElement(0);
+ */
 template<class T>
 inline bool CVector<T>::VECdelElement(unsigned int nIndex)
 {
@@ -193,6 +199,12 @@ inline bool CVector<T>::VECdelElement(unsigned int nIndex)
 	return true;
 }
 
+/**
+ *  @brief  Delete a pointer to an element from the vector.
+ *	@throws Index is out of vector range.
+ *	@param	index	 Index of the element that will be removed.
+ *	@example myVector.VECdelElementPointer(0);
+ */
 template<class T>
 inline bool CVector<T>::VECdelElementPointer(unsigned int nIndex)
 {
@@ -224,7 +236,7 @@ inline bool CVector<T>::VECdelElementPointer(unsigned int nIndex)
 
 /**
  *  @brief  Return the size of the vector.
- *	@example size_t myVectorSize = myVector.size();
+ *	@example size_t myVectorSize = myVector.VECsize();
  */
 template<class T>
 inline size_t CVector<T>::VECsize() const {
@@ -233,7 +245,7 @@ inline size_t CVector<T>::VECsize() const {
 
 /**
  *  @brief  Return the address of the first element.
- *	@example const char* myVectorBegin = myVector.begin();
+ *	@example const char* myVectorBegin = myVector.VECbegin();
  */
 template<class T>
 inline T *CVector<T>::VECbegin() const {
@@ -242,7 +254,7 @@ inline T *CVector<T>::VECbegin() const {
 
 /**
  *  @brief  Return the address of the last element.
- *	@example const char* myVectorEnd = myVector.end();
+ *	@example const char* myVectorEnd = myVector.VECend();
  */
 template<class T>
 inline T *CVector<T>::VECend() const {
@@ -252,7 +264,7 @@ inline T *CVector<T>::VECend() const {
 /**
  *  @brief  Return a pointer pointing to the searched element, if not found return NULL.
  *  @param  element  Element to search in the vector.
- *	@example const char* myWord = myVector.find("Hello");
+ *	@example const char* myWord = myVector.VECfind("Hello");
  */
 template<class T>
 int CVector<T>::VECfind(T element) const {
@@ -269,7 +281,7 @@ int CVector<T>::VECfind(T element) const {
  *  @brief  Return the element stored at index.
  *	@throws Index is out of vector range.
  *  @param  index Index of the element to retrieve.
- *	@example const char* myWord = myVector.getElement(1);
+ *	@example const char* myWord = myVector.VECgetElement(1);
  */
 template<class T>
 inline T CVector<T>::VECgetElement(unsigned int nIndex) const {
@@ -288,7 +300,7 @@ inline T CVector<T>::VECgetElement(unsigned int nIndex) const {
 
 /**
  *  @brief  Return the whole vector as an Array.
- *	@example const char** mySentence = myVector.getVectorElements();
+ *	@example const char** mySentence = myVector.VECgetVectorElements();
  */
 template<class T>
 inline T *CVector<T>::VECgetVectorElements() const {
@@ -324,9 +336,25 @@ void CVector<T>::VECdelete() {
 		delete VECpValueList[nVectorIterator];
 	}
 }
+
+/**
+ *  @brief  Clears a certain pointer from the vector.
+ *	@throws Index is out of vector range.
+ *  @param  index Index of the element to retrieve.
+ *	@example  myVector.VECdelete(1);
+ */
 template<class T>
 inline void CVector<T>::VECdelete(unsigned int nIndex)
 {
+	try
+	{
+		if (nIndex < 0 || nIndex > VECnCapacity - 1) throw (const char *)"GET ERROR: index is out of vector range";
+	}
+	catch (const char *e)
+	{
+		cout << e << endl;
+		return;
+	}
 	for (unsigned int nVectorIterator = 0; nVectorIterator < VECnCapacity; nVectorIterator++) {
 		if (nVectorIterator == nIndex) {
 			delete VECpValueList[nVectorIterator];
@@ -354,7 +382,7 @@ void CVector<T>::VECsetSize(size_t nSize)
  *  @brief  Return true if two pointers are deep copies, false otherwise.
  *  @param  element1  First element.
  *  @param  element2  Second element.
- *	@example pointerValueEqual(element1, element2);
+ *	@example VECpointerValueEqual(element1, element2);
  */
 template<class T>
 bool CVector<T>::VECpointerValueEqual(T element1,T element2) const {
