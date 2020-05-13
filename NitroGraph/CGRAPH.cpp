@@ -17,10 +17,6 @@ CGraph::CGraph(CParser &PARparser)
 	nSommetCount = STRnbSommets.STRtoInt();
 	int nArcCount = STRnbArcs.STRtoInt();
 
-
-
-
-
 	for (unsigned int nSomIterator = 0; nSomIterator < nSommetCount; nSomIterator++)
 	{
 		size_t delPos = VECpSTRsommetsVector.VECgetElement(nSomIterator)->STRfind('=');
@@ -94,7 +90,12 @@ CGraph::CGraph(CParser &PARparser)
 }
 CGraph::CGraph(CGraph &GRAgraph) 
 {
-
+	nSommetCount = GRAgraph.nSommetCount;
+	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	{
+		CSommet* newSommet = new CSommet(*GRAgraph.GRAgetSommets(nGraphIterator));
+		VECSOMSommetVector.VECpush(newSommet);
+	}
 }
 void CGraph::GRAaddSommet(unsigned int nNum) 
 {
