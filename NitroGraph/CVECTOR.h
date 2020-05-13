@@ -19,6 +19,7 @@ class CVector
 		void VECpop();
 		bool VECmodify(T element, unsigned int nIndex);
 		bool VECdelElement(unsigned int nIndex);
+		bool VECdelElementPointer(unsigned int nIndex);
 		void VECsetSize(size_t nSize);
 
 
@@ -36,6 +37,7 @@ class CVector
 
 		//destructors
 		void VECdelete();
+		void VECdelete(unsigned int nIndex);
 		~CVector();
 
 	private:
@@ -191,6 +193,34 @@ inline bool CVector<T>::VECdelElement(unsigned int nIndex)
 	return true;
 }
 
+template<class T>
+inline bool CVector<T>::VECdelElementPointer(unsigned int nIndex)
+{
+	try
+	{
+		if (nIndex < 0 || nIndex > VECnCapacity - 1) throw (const char *)"MODIFY ERROR: index is out of vector range";
+	}
+	catch (const char *e)
+	{
+		cout << e << endl;
+		return false;
+	}
+
+	T *pNewValueList = new T[VECnCapacity - 1];
+	unsigned int nNewValueListIterator = 0;
+	unsigned int nValueListIterator = 0;
+	for (nValueListIterator; nValueListIterator < VECnCapacity; nValueListIterator++) {
+		if (nValueListIterator != nIndex) {
+			pNewValueList[nNewValueListIterator] = VECpValueList[nValueListIterator];
+			nNewValueListIterator++;
+		}
+	}
+	VECdelete(nIndex);
+	VECpValueList = pNewValueList;
+	VECnCapacity--;
+	return true;
+}
+
 /**
  *  @brief  Return the size of the vector.
  *	@example size_t myVectorSize = myVector.size();
@@ -291,6 +321,15 @@ template <class T>
 void CVector<T>::VECdelete() {
 	for (unsigned int nVectorIterator = 0; nVectorIterator < VECnCapacity; nVectorIterator++) {
 		delete VECpValueList[nVectorIterator];
+	}
+}
+template<class T>
+inline void CVector<T>::VECdelete(unsigned int nIndex)
+{
+	for (unsigned int nVectorIterator = 0; nVectorIterator < VECnCapacity; nVectorIterator++) {
+		if (nVectorIterator == nIndex) {
+			delete VECpValueList[nVectorIterator];
+		}
 	}
 }
 /**
