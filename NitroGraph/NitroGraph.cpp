@@ -2,6 +2,7 @@
 //
 
 #include "CGRAPH.h"
+#include "CPRINTER.h"
 
 int main()
 {

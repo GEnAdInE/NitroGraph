@@ -162,6 +162,7 @@
     <ClInclude Include="CARC.h" />
     <ClInclude Include="CGRAPH.h" />
     <ClInclude Include="CPARSER.h" />
+    <ClInclude Include="CPRINTER.h" />
     <ClInclude Include="CSOMMET.h" />
     <ClInclude Include="CSTRING.h" />
     <ClInclude Include="CVECTOR.h" />
