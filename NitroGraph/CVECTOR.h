@@ -18,7 +18,9 @@ class CVector
 		void VECpush(T value);
 		void VECpop();
 		bool VECmodify(T element, unsigned int nIndex);
+		bool VECdelElement(unsigned int nIndex);
 		void VECsetSize(size_t nSize);
+
 
 		//accessors
 		size_t VECsize() const;
@@ -159,6 +161,33 @@ inline bool CVector<T>::VECmodify(T element, unsigned int nIndex) {
 
 	VECpValueList[nIndex] = element;
 	return true;
+}
+
+template<class T>
+inline bool CVector<T>::VECdelElement(unsigned int nIndex)
+{
+	try
+	{
+		if (nIndex < 0 || nIndex > VECnCapacity - 1) throw (const char *)"MODIFY ERROR: index is out of vector range";
+	}
+	catch (const char *e)
+	{
+		cout << e << endl;
+		return;
+	}
+
+	T *pNewValueList = new T[VECnCapacity - 1];
+	unsigned int nNewValueListIterator = 0;
+	unsigned int nValueListIterator = 0;
+	for (nValueListIterator; nValueListIterator < VECnCapacity; nValueListIterator++) {
+		if (nNewValueListIterator != nIndex) {
+			pNewValueList[nValueListIterator] = VECpValueList[nNewValueListIterator];
+			nValueListIterator++;
+		}
+	}
+	delete[] VECpValueList;
+	VECpValueList = pNewValueList;
+	VECnCapacity--;
 }
 
 /**
