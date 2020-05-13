@@ -28,15 +28,12 @@ class CGraph
 
 
 		//accessors
-		CSommet& GRAgetSommetById(unsigned int nNum) const;
+		CSommet* GRAgetSommetById(unsigned int nNum) const;
 		bool GRASommetAlreadyExist(unsigned int nNum);//attention risque d'erreur si on verifie pas que le sommet exist 
 		bool GRAarcAlreadyExist(unsigned int nFrom, unsigned int nTo);
-		
-		//operator
-		void operator=(CGraph GRAgraph);
-		bool operator==(CGraph GRAgraph);
-		bool operator!=(CGraph GRAgraph);
-		
+		unsigned int GRAgetSommetNb();
+		CSommet* GRAgetSommets(unsigned int nElement);
+
 		//destructors
 		~CGraph();
 
