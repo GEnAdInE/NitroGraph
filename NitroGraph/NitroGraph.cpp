@@ -2,25 +2,25 @@
 //
 
 #include "CGRAPH.h"
+#include "CPRINTER.h"
 
-int main()
+int main(unsigned int argc, const char* argv[])
 {
-    
-	
-	CGraph test;
-	test.GRAaddSommet(0);
-	test.GRAaddSommet(10);
-	test.GRAaddSommet(20);
-	test.GRAaddArcTo(0, 10);
-	test.GRAaddArcTo(10, 20);
-	test.GRAaddArcTo(20, 0);
+	if (argc == 1) {
+		cout << "NO INPUT FILE ENTERED ... EXITING" << endl;
+		return 1;
+	}
+	for (unsigned int argvIterator = 1; argvIterator < argc; argvIterator++) {
 
-	//test.GRAmodifySommet(0, 1);
+		const char* pcFiles = argv[argvIterator];
+		CParser parser(pcFiles, '\n', '=', false);
+		CGraph parsed(parser);
+		PRIprint(parsed);
+		parsed.GRAreverseAllArc();
+		PRIprint(parsed);
+	}	
 	
-	test.GRAdelSommetById(10);
-	
-	//test.GRAreverseAllArc();
-	
+
 
 
 	return 0;
