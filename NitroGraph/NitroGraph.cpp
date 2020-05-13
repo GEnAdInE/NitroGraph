@@ -13,11 +13,8 @@ int main()
 	test.GRAaddSommet(20);
 	test.GRAaddArcTo(0, 10);
 	test.GRAaddArcTo(10, 20);
-	test.GRAaddArcTo(20, 10);
-	for (int i = 0; i < 2; i++)
-	{
-		std::cout << test.GRAgetSommetById(10)->SOMgetArrivant()[i]->ARCget() << endl;
-	}
+	test.GRAaddArcTo(20, 0);
+
 	//test.GRAmodifySommet(0, 1);
 	
 	test.GRAdelSommetById(10);
