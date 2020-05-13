@@ -62,8 +62,8 @@ CSommet::CSommet(int nNum, CArc ** arrivant,unsigned int nSizeA ,CArc ** partant
 	nPartantSize = nSizeP;
 	nArrivantSize = nSizeA;
 	
-	ARCARCarrivant = (CArc**)malloc(sizeof(CArc**)*nArrivantSize);
-	ARCARCpartant = (CArc**)malloc(sizeof(CArc**)*nPartantSize);
+	ARCARCarrivant = (CArc**)malloc(sizeof(CArc*)*nArrivantSize);
+	ARCARCpartant = (CArc**)malloc(sizeof(CArc*)*nPartantSize);
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
 	{
 		ARCARCarrivant[nIterator] = arrivant[nIterator];

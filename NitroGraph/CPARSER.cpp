@@ -22,10 +22,12 @@ CParser::CParser() {
  *  @param  sFilePath				Path of the file to read from.
  *	@param	cKeySeparators			Character that separates each key/value pair, default : ';'.
  *	@param	cKeyValueAttribution	Character that separates each the key from the value, default : ':'.
- *	@param	bRemoveNewLine			True : automaticaly removes then new line character '\n'.
+ *	@param	bRemoveNewLine			True : automaticaly removes the new line character, default : true.
+  *	@param	bRemoveSpecCharacters	True : automaticaly removes the '\t' character, default : true.
  *	@example CParser myParser("data.txt");
  */
 CParser::CParser(const char *pcFilePath, char cKeySeparator, char cKeyValueAttribution, bool bRemoveNewLine, bool bRemoveSpecCharacters) {
+	
 	ifstream IFSfileStream;
 
 	IFSfileStream.open(pcFilePath);
@@ -33,8 +35,8 @@ CParser::CParser(const char *pcFilePath, char cKeySeparator, char cKeyValueAttri
 	{
 		if (IFSfileStream.is_open()) {
 			while (!IFSfileStream.eof()) {
-				char pcLine[40];
-				IFSfileStream.getline(pcLine, 40, cKeySeparator);
+				char pcLine[100];
+				IFSfileStream.getline(pcLine, 100, cKeySeparator);
 
 				CString STRline = (const char*)pcLine;
 
@@ -56,10 +58,10 @@ CParser::CParser(const char *pcFilePath, char cKeySeparator, char cKeyValueAttri
 
 				//ARRAY HANDLING
 				if (STRline.STRfind('[') != -1) {
-					IFSfileStream.getline(pcLine, 40, ']');
+					IFSfileStream.getline(pcLine, 100, ']');
 					CString STRarray = (const char*)pcLine;
-					STRarray.STRreplace('\n', ' ');
 					STRvalue += STRarray;
+					IFSfileStream.getline(pcLine, 100, cKeySeparator);
 				}
 				else {
 					STRvalue += STRline.STRsubstr(nDelPos + 1);
@@ -77,7 +79,7 @@ CParser::CParser(const char *pcFilePath, char cKeySeparator, char cKeyValueAttri
 				//FINAL PUSH
 				VECpcKeyVector.VECpush(STRkey.STRtoChar());
 				VECpcValueVector.VECpush(STRvalue.STRtoChar());
-								
+
 			}
 
 
