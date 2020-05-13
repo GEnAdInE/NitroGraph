@@ -29,10 +29,11 @@ class CGraph
 
 		//accessors
 		CSommet* GRAgetSommetById(unsigned int nNum) const;
-		bool GRASommetAlreadyExist(unsigned int nNum);//attention risque d'erreur si on verifie pas que le sommet exist 
-		bool GRAarcAlreadyExist(unsigned int nFrom, unsigned int nTo);
-		unsigned int GRAgetSommetNb();
-		CSommet* GRAgetSommets(unsigned int nElement);
+		bool GRASommetAlreadyExist(unsigned int nNum) const;//attention risque d'erreur si on verifie pas que le sommet exist 
+		bool GRAarcAlreadyExist(unsigned int nFrom, unsigned int nTo) const;
+		unsigned int GRAgetSommetCount() const;
+		unsigned int GRAgetArcCount() const;
+		CSommet* GRAgetSommets(unsigned int nElement) const;
 
 		//destructors
 		~CGraph();
@@ -42,6 +43,6 @@ class CGraph
 	private:
 		CVector<CSommet*> VECSOMSommetVector;
 		unsigned int nSommetCount;
-
+		unsigned int nArcCount;
 };
 
