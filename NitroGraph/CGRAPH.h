@@ -25,7 +25,7 @@ class CGraph
 		void GRAremoveArc(unsigned int nFromId, unsigned int nToId);
 		void GRAmodifyArc(unsigned int nFromId , unsigned int nToId, unsigned int nFromNewId, unsigned int nToNewId);
 		void GRAreverseArc(unsigned int nFromId, unsigned int nToId);
-		void GRAreverseAllArc();
+		CGraph* GRAreverseAllArc();
 
 
 		//accessors
