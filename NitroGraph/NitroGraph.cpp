@@ -9,15 +9,21 @@ int main()
 	
 	CGraph test;
 	test.GRAaddSommet(0);
-	test.GRAaddSommet(3);
-	test.GRAaddSommet(2);
-	test.GRAaddArcTo(0, 3);
-	test.GRAaddArcTo(0, 2);
-	if (test.GRAgetSommetById(0) == test.GRAgetSommetById(1))
+	test.GRAaddSommet(10);
+	test.GRAaddSommet(20);
+	test.GRAaddArcTo(0, 10);
+	test.GRAaddArcTo(10, 20);
+	test.GRAaddArcTo(20, 10);
+	for (int i = 0; i < 2; i++)
 	{
-		std::cout << "test" << endl;
+		std::cout << test.GRAgetSommetById(10)->SOMgetArrivant()[i]->ARCget() << endl;
 	}
-	test.GRAreverseAllArc();
+	test.GRAmodifySommet(0, 1);
+	for (int i = 0; i < 2; i++)
+	{
+		std::cout << test.GRAgetSommetById(10)->SOMgetArrivant()[i]->ARCget() << endl;
+	}
+	//test.GRAreverseAllArc();
 	
 
 

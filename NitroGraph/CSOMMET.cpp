@@ -18,15 +18,15 @@ CSommet::CSommet(CSommet & param)
 	nArrivantSize = param.nArrivantSize;
 	nPartantSize = param.nPartantSize;
 
-	ARCARCarrivant = (CArc**)malloc(sizeof(CArc**)*nArrivantSize);
-	ARCARCpartant = (CArc**)malloc(sizeof(CArc**)*nPartantSize);
+	ARCARCarrivant = (CArc**)malloc(sizeof(CArc*)*nArrivantSize);
+	ARCARCpartant = (CArc**)malloc(sizeof(CArc*)*nPartantSize);
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
 	{
-		ARCARCarrivant[nIterator] = param.ARCARCarrivant[nIterator];
+		ARCARCarrivant[nIterator] = new CArc(*param.ARCARCarrivant[nIterator]);
 	}
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizePartant(); nIterator++)
 	{
-		ARCARCpartant[nIterator] = param.ARCARCpartant[nIterator];
+		ARCARCpartant[nIterator] = new CArc(*param.ARCARCpartant[nIterator]);
 	}
 	
 
@@ -66,11 +66,11 @@ CSommet::CSommet(int nNum, CArc ** arrivant,unsigned int nSizeA ,CArc ** partant
 	ARCARCpartant = (CArc**)malloc(sizeof(CArc*)*nPartantSize);
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
 	{
-		ARCARCarrivant[nIterator] = arrivant[nIterator];
+		ARCARCarrivant[nIterator] = new CArc(*arrivant[nIterator]);
 	}
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizePartant(); nIterator++)
 	{
-		ARCARCpartant[nIterator] = partant[nIterator];
+		ARCARCpartant[nIterator] = new CArc(*partant[nIterator]);
 	}
 	
 
@@ -238,7 +238,7 @@ void CSommet::operator=(CSommet SOMsommet)
 	nNumero = SOMsommet.nNumero;
 	nArrivantSize = SOMsommet.nArrivantSize;
 	nPartantSize = SOMsommet.nPartantSize;
-
+	//vider tout les arc
 	realloc(ARCARCarrivant,sizeof(CArc**)*nArrivantSize);
 	realloc(ARCARCpartant,sizeof(CArc**)*nPartantSize);
 	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
