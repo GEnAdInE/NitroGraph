@@ -37,6 +37,7 @@ class CVector
 
 		//destructors
 		void VECdelete();
+		void VECdelete(unsigned int nIndex);
 		~CVector();
 
 	private:
@@ -214,7 +215,7 @@ inline bool CVector<T>::VECdelElementPointer(unsigned int nIndex)
 			nNewValueListIterator++;
 		}
 	}
-	VECdelete();
+	VECdelete(nIndex);
 	VECpValueList = pNewValueList;
 	VECnCapacity--;
 	return true;
@@ -320,6 +321,15 @@ template <class T>
 void CVector<T>::VECdelete() {
 	for (unsigned int nVectorIterator = 0; nVectorIterator < VECnCapacity; nVectorIterator++) {
 		delete VECpValueList[nVectorIterator];
+	}
+}
+template<class T>
+inline void CVector<T>::VECdelete(unsigned int nIndex)
+{
+	for (unsigned int nVectorIterator = 0; nVectorIterator < VECnCapacity; nVectorIterator++) {
+		if (nVectorIterator == nIndex) {
+			delete VECpValueList[nVectorIterator];
+		}
 	}
 }
 /**
