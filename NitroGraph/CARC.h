@@ -10,7 +10,7 @@ using namespace std;
 class CArc
 {
 	private : 
-		unsigned int SOMdestination;
+		unsigned int nDestination;
 
 	public:
 
@@ -23,6 +23,9 @@ class CArc
 		void ARCmodify(unsigned int SOMdest);
 		unsigned int ARCget();
 
+		bool operator==(CArc arc);
+		bool operator!=(CArc arc);
+		void operator=(CArc arc);
 
 
 };

@@ -201,18 +201,12 @@ void CGraph::GRAmodifyArc(unsigned int nFromId, unsigned int nToId, unsigned int
 
 void CGraph::GRAreverseAllArc()
 {
+	
 	for (unsigned int nIterator = 0; nIterator < nSommetCount; nIterator++)
 	{
-		for (unsigned int nSomIterator = 0; nSomIterator < VECSOMSommetVector.VECgetElement(nIterator)->SOMgetSizePartant(); nSomIterator++)
-		{
-			unsigned int nToId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetPartant()[nSomIterator]->ARCget();
-			unsigned int nFromId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetNumero();
-			GRAmodifyArc(nFromId, nToId, nToId, nFromId);
-		}
-		
-		
+		VECSOMSommetVector.VECgetElement(nIterator)->SOMreverseArc();
 	}
-
+	
 
 
 
@@ -253,6 +247,16 @@ bool CGraph::GRAarcAlreadyExist(unsigned int nFom, unsigned int nTo)
 			return true;
 		}
 	}
+	return false;
+}
+
+void CGraph::operator=(CGraph GRAgraph)
+{
+	//faire comme le copy constructeur 
+}
+
+bool CGraph::operator==(CGraph GRAgraph)
+{
 	return false;
 }
 

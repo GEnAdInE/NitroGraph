@@ -116,17 +116,17 @@ void CSommet::SOMsetNumero(unsigned int nNum)
 
 }
 
-const unsigned int CSommet::SOMgetNumero()
+unsigned int CSommet::SOMgetNumero()
 {
 	return nNumero;
 }
 
-const unsigned int CSommet::SOMgetSizeArrivant()
+unsigned int CSommet::SOMgetSizeArrivant()
 {
 	return nArrivantSize;
 }
 
-const unsigned int CSommet::SOMgetSizePartant()
+unsigned int CSommet::SOMgetSizePartant()
 {
 	return nPartantSize;
 }
@@ -180,6 +180,77 @@ void CSommet::SOMsetArrivant(CArc ** ARCARCarriv)
 void CSommet::SOMsetPartant(CArc ** ARCARCpart)
 {
 	ARCARCpartant = ARCARCpart;
+}
+
+void CSommet::SOMreverseArc()
+{
+	CArc** tmpArc;
+	unsigned int tmpSize;
+
+	tmpArc = ARCARCarrivant;
+	ARCARCarrivant = ARCARCpartant;
+	ARCARCpartant = tmpArc;
+	
+	tmpSize = nArrivantSize;
+	nArrivantSize = nPartantSize;
+	nPartantSize = tmpSize;
+
+}
+
+bool CSommet::operator==(CSommet SOMsommet)
+{
+	if (nNumero != SOMsommet.nNumero)
+	{
+		return false;
+	}
+	if (nArrivantSize != SOMsommet.nArrivantSize)
+	{
+		return false;
+	}
+	if (nPartantSize != SOMsommet.nPartantSize)
+	{
+		return false;
+	}
+	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
+	{
+		if (ARCARCarrivant[nIterator] != SOMsommet.ARCARCarrivant[nIterator])
+		{
+			return false;
+		}
+
+	}
+	for (unsigned int nIterator = 0; nIterator < SOMgetSizePartant(); nIterator++)
+	{
+		if (ARCARCpartant[nIterator] != SOMsommet.ARCARCpartant[nIterator])
+		{
+			return false;
+		}
+	}
+	return true;
+			
+	
+
+}
+
+void CSommet::operator=(CSommet SOMsommet)
+{
+
+	nNumero = SOMsommet.nNumero;
+	nArrivantSize = SOMsommet.nArrivantSize;
+	nPartantSize = SOMsommet.nPartantSize;
+
+	realloc(ARCARCarrivant,sizeof(CArc**)*nArrivantSize);
+	realloc(ARCARCpartant,sizeof(CArc**)*nPartantSize);
+	for (unsigned int nIterator = 0; nIterator < SOMgetSizeArrivant(); nIterator++)
+	{
+		ARCARCarrivant[nIterator] = SOMsommet.ARCARCarrivant[nIterator];
+	}
+	for (unsigned int nIterator = 0; nIterator < SOMgetSizePartant(); nIterator++)
+	{
+		ARCARCpartant[nIterator] = SOMsommet.ARCARCpartant[nIterator];
+	}
+
+
 }
 
 

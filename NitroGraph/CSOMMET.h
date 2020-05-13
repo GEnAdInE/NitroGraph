@@ -23,18 +23,20 @@ class CSommet
 
 
 		void SOMsetNumero(unsigned int nNum);
-		const unsigned int SOMgetNumero();
-		const unsigned int SOMgetSizeArrivant(); 
-		const unsigned int SOMgetSizePartant();
+		unsigned int SOMgetNumero();
+		unsigned int SOMgetSizeArrivant(); 
+		unsigned int SOMgetSizePartant();
 		void SOMsetSizeArrivant(unsigned int nSize);
 		void SOMsetSizePartant(unsigned int nSize);
 		CArc** SOMgetArrivant();
 		CArc** SOMgetPartant();
 		void SOMsetArrivant(CArc** ARCARCarriv);
 		void SOMsetPartant(CArc** ARCARCpart);
+		void SOMreverseArc();
 
-
-
+		bool operator==(CSommet SOMsommet);
+		bool operator!=(CSommet SOMsommet);
+		void operator=(CSommet SOMsommet);
 
 
 
