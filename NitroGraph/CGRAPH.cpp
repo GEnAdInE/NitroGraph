@@ -184,7 +184,7 @@ void CGraph::GRAmodifySommet(unsigned int nCurrentNum , unsigned int nNewNum)
 	}
 
 }
-void CGraph::GRAdelSommet(unsigned int nNum)
+bool CGraph::GRAdelSommet(unsigned int nNum)
 {
 	try
 	{
@@ -194,19 +194,21 @@ void CGraph::GRAdelSommet(unsigned int nNum)
 	catch (const char *e)
 	{
 		cout << e << endl;
-		return;
+		return false;
 	}
 
 	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
 	{
 		if (VECSOMSommetVector.VECgetElement(nGraphIterator)->SOMgetNumero() == nNum)
 		{
-			//ajouter Vector::delElement();
+			//ajouter Vector::delElement
+			VECSOMSommetVector.VECdelElement(nNum);
 			nSommetCount--;
 			//prendre inspi du destrcteur 
 			//bien detruire tout les arcs (partant et arrivant)
 		}
 	}
+	return true;
 }
 
 //ARC related function
@@ -307,15 +309,17 @@ void CGraph::GRAmodifyArc(unsigned int nFromId, unsigned int nToId, unsigned int
 
 void CGraph::GRAreverseAllArc()
 {
-	
 	for (unsigned int nIterator = 0; nIterator < nSommetCount; nIterator++)
 	{
-		VECSOMSommetVector.VECgetElement(nIterator)->SOMreverseArc();
+		for (unsigned int nSomIterator = 0; nSomIterator < VECSOMSommetVector.VECgetElement(nIterator)->SOMgetSizePartant(); nSomIterator++)
+		{
+			unsigned int nToId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetPartant()[nSomIterator]->ARCget();
+			unsigned int nFromId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetNumero();
+			GRAmodifyArc(nFromId, nToId, nToId, nFromId);
+		}
+		
+		
 	}
-	
-
-
-
 
 }
 

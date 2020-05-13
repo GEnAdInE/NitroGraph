@@ -2,7 +2,7 @@
 
 CArc::CArc()
 {
-	nDestination = NULL;
+	SOMdestination = NULL;
 
 }
 
@@ -19,14 +19,14 @@ CArc::CArc(unsigned int ndest)
 		return;
 	}
 
-	nDestination = ndest;
+	SOMdestination = ndest;
 
 }
 
 
 CArc::CArc(CArc &param)
 {
-	nDestination = param.nDestination;
+	SOMdestination = param.SOMdestination;
 }
 
 CArc::~CArc()
@@ -46,35 +46,10 @@ void CArc::ARCmodify(unsigned int nDest)
 		return;
 	}
 
-	nDestination = nDest;
+	SOMdestination = nDest;
 }
 
 unsigned int CArc::ARCget()
 {
-	return nDestination;
-}
-
-bool CArc::operator==(CArc arc)
-{
-	if (nDestination == arc.nDestination)
-	{
-		return true;
-	}
-	return false;
-}
-
-bool CArc::operator!=(CArc arc)
-{
-	if (nDestination != arc.nDestination)
-	{
-		return true;
-	}
-	return false;
-}
-
-void CArc::operator=(CArc arc)
-{
-
-	nDestination = arc.nDestination;
-
+	return SOMdestination;
 }
