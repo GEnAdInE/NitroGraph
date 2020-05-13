@@ -398,4 +398,18 @@ CSommet * CGraph::GRAgetSommets(unsigned int nElement) const
 //Destructor
 CGraph::~CGraph()
 {
+	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	{
+		CSommet *current = VECSOMSommetVector.VECgetElement(nGraphIterator);
+		for (unsigned int nSommetIterator = 0; nSommetIterator < current->SOMgetSizePartant(); nSommetIterator++)
+		{
+			unsigned int dest = current->SOMgetPartant()[nSommetIterator]->ARCget();
+			unsigned int from = current->SOMgetNumero();
+			GRAremoveArc(from, dest);
+		}
+	}
+	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
+	{
+		delete VECSOMSommetVector.VECgetElement(nGraphIterator);
+	}
 }
