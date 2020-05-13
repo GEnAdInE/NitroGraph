@@ -47,6 +47,7 @@ CGraph::CGraph(CParser &PARparser)
 			if (STRdestPartantNb.STRtoInt() == VECSOMSommetVector.VECgetElement(nSomIterator)->SOMgetNumero()) {
 				nPartantSize++;
 			}
+			VECarcVec.VECdelete();
 		}
 
 		CArc **ARCarcArrivants = (CArc**)malloc(sizeof(CArc*)*nPartantSize);
@@ -80,6 +81,7 @@ CGraph::CGraph(CParser &PARparser)
 				ARCarcPartants[nArcPartantIterator] = new CArc(nDestArrivantNb);
 				nArcPartantIterator++;
 			}
+			VECarcVec.VECdelete();
 
 		}
 
@@ -88,6 +90,8 @@ CGraph::CGraph(CParser &PARparser)
 		VECSOMSommetVector.VECgetElement(nSomIterator)->SOMsetPartant(ARCarcPartants);
 		VECSOMSommetVector.VECgetElement(nSomIterator)->SOMsetSizePartant(nArcPartantIterator);
 	}
+	VECpSTRsommetsVector.VECdelete();
+	VECpSTRarcsVector.VECdelete();
 }
 CGraph::CGraph(CGraph &GRAgraph) 
 {
@@ -164,7 +168,7 @@ void CGraph::GRAmodifySommet(unsigned int nCurrentNum, unsigned int nNewNum)
 
 
 	GRAgetSommetById(nCurrentNum)->SOMsetNumero(nNewNum);
-	//changer les numeros des arcs lié a ce sommet
+
 	for (unsigned int nGraphIterator = 0; nGraphIterator < nSommetCount; nGraphIterator++)
 	{
 		CSommet *current = VECSOMSommetVector.VECgetElement(nGraphIterator);
@@ -230,7 +234,6 @@ bool CGraph::GRAdelSommetById(unsigned int nId)
 	return true;
 }
 
-//ARC related function
 void CGraph::GRAaddArcTo(unsigned int nFromId,unsigned int nToId)
 {
 
@@ -334,19 +337,21 @@ void CGraph::GRAreverseArc(unsigned int nFromId, unsigned int nToId)
 	GRAaddArcTo(nToId, nFromId);
 }
 
-void CGraph::GRAreverseAllArc()
+CGraph * CGraph::GRAreverseAllArc()
 {
+	CGraph* newGraph = new CGraph(*this);
+
 	for (unsigned int nIterator = 0; nIterator < nSommetCount; nIterator++)
 	{
 		for (unsigned int nSomIterator = 0; nSomIterator < VECSOMSommetVector.VECgetElement(nIterator)->SOMgetSizePartant(); nSomIterator++)
 		{
 			unsigned int nToId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetPartant()[nSomIterator]->ARCget();
 			unsigned int nFromId = VECSOMSommetVector.VECgetElement(nIterator)->SOMgetNumero();
-			GRAreverseArc(nFromId, nToId);
+			newGraph->GRAreverseArc(nFromId, nToId);
 		}
 		
-		
 	}
+	return newGraph;
 
 }
 

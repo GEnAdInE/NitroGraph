@@ -15,9 +15,11 @@ int main(unsigned int argc, const char* argv[])
 		const char* pcFiles = argv[argvIterator];
 		CParser parser(pcFiles, '\n', '=', false);
 		CGraph parsed(parser);
+		cout << "GRAPH DE BASE:" << endl << endl;
 		PRIprint(parsed);
-		parsed.GRAreverseAllArc();
-		PRIprint(parsed);
+		CGraph reverseGraph = *parsed.GRAreverseAllArc();
+		cout << endl << "GRAPH DE BASE AVEC ARCS INVERSES:" << endl << endl;
+		PRIprint(reverseGraph);
 	}	
 	
 
