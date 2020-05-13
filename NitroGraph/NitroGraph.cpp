@@ -17,9 +17,10 @@ int main(unsigned int argc, const char* argv[])
 		CGraph parsed(parser);
 		cout << "GRAPH DE BASE:" << endl << endl;
 		PRIprint(parsed);
-		CGraph reverseGraph = *parsed.GRAreverseAllArc();
+		CGraph * reverseGraph = parsed.GRAreverseAllArc();
 		cout << endl << "GRAPH DE BASE AVEC ARCS INVERSES:" << endl << endl;
-		PRIprint(reverseGraph);
+		PRIprint(*reverseGraph);
+		delete reverseGraph;
 	}	
 	
 
